@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsDemo.Domain", "Ticke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsDemo.EF", "TicketsDemo.EF\TicketsDemo.EF.csproj", "{E9437256-3145-47BF-81A3-C69FD4DE95F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsDemo.Mongo", "Project1\TicketsDemo.Mongo.csproj", "{DCBFACCC-EF28-48AE-8C12-310A8175A7DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsDemo.Mongo", "TicketsDemo.Mongo\TicketsDemo.Mongo.csproj", "{DCBFACCC-EF28-48AE-8C12-310A8175A7DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
