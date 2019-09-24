@@ -40,9 +40,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\ReservationRepository.cs" />
-    <Compile Include="Repositories\RunRepository.cs" />
-    <Compile Include="Repositories\TicketRepository.cs" />
     <Compile Include="Repositories\TrainRepository.cs" />
     <Compile Include="TicketsContext.cs" />
   </ItemGroup>
