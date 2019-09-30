@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TicketsDemo.Domain
 {
-    static class PriceList
+    public static class PriceList
     {
         public static decimal TEA = 15;
         public static decimal COFFEE = 17;

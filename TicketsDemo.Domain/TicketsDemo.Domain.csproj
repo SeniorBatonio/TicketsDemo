@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultImplementations\StrategyFactory.cs" />
+    <Compile Include="Interfaces\IStrategyFactory.cs" />
     <Compile Include="PriceList.cs" />
     <Compile Include="DefaultImplementations\FileLogger.cs" />
     <Compile Include="DefaultImplementations\DefaultPriceCalculationStrategy.cs" />

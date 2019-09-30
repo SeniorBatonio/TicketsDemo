@@ -13,7 +13,7 @@ namespace TicketsDemo.Domain.DefaultImplementations
         int _coffeeCount;
         int _cookiesCount;
 
-        public PriceCalculationDecorator(IPriceCalculationStrategy strategy, int teaCount = 0, int coffeeCount = 0, int cookiesCount = 0)
+        public PriceCalculationDecorator(IPriceCalculationStrategy strategy, int teaCount, int coffeeCount, int cookiesCount)
         {
             _strategy = strategy;
             _teaCount = teaCount;
@@ -25,21 +25,12 @@ namespace TicketsDemo.Domain.DefaultImplementations
         {
             var priceComponents = new List<PriceComponent>();
             priceComponents.AddRange(_strategy.CalculatePrice(placeInRun));
-            if(_teaCount != 0)
-            {
-                var teaComponent = new PriceComponent { Name = "Tea price", Value = PriceList.TEA * _teaCount };
-                priceComponents.Add(teaComponent);
-            }
-            if(_coffeeCount != 0)
-            {
-                var coffeeComponent = new PriceComponent { Name = "Coffee price", Value = PriceList.COFFEE * _coffeeCount };
-                priceComponents.Add(coffeeComponent);
-            }
-            if(_cookiesCount != 0)
-            {
-                var cookiesComponent = new PriceComponent { Name = "Cookies price", Value = PriceList.COOKIES * _cookiesCount };
-                priceComponents.Add(cookiesComponent);
-            }
+            var teaComponent = new PriceComponent { Name = "Tea price", Value = PriceList.TEA * _teaCount };
+            priceComponents.Add(teaComponent);
+            var coffeeComponent = new PriceComponent { Name = "Coffee price", Value = PriceList.COFFEE * _coffeeCount };
+            priceComponents.Add(coffeeComponent);
+            var cookiesComponent = new PriceComponent { Name = "Cookies price", Value = PriceList.COOKIES * _cookiesCount };
+            priceComponents.Add(cookiesComponent);
             return priceComponents;
         }
     }
