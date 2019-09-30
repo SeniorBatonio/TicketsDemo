@@ -28,7 +28,9 @@ namespace TicketsDemo.Mongo.Repositories
 
         public Train GetTrainDetails(int trainId)
         {
-            return db.Trains.Find(t => t.Id == trainId).FirstOrDefault();
+            var train = db.Trains.Find(t => t.Id == trainId).FirstOrDefault();
+            train.Carriages.ForEach(c => c.Places.ForEach(p => { p.Carriage = c; p.CarriageId = c.Id; }));
+            return train;
         }
 
         public void UpdateTrain(Train train)
