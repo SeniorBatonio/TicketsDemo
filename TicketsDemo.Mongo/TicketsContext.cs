@@ -1,14 +1,17 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using System.Configuration;
 using TicketsDemo.Data.Entities;
 
 namespace TicketsDemo.Mongo
 {
-    class TicketsContext
+    public class TicketsContext
     {
         IMongoDatabase database; 
 
         public IMongoCollection<Train> Trains { get; set; }
+        public IMongoCollection<Carriage> Carriages { get; set; }
+        public IMongoCollection<Place> Places { get; set; }
 
         public TicketsContext()
         {
@@ -21,6 +24,8 @@ namespace TicketsDemo.Mongo
             database = client.GetDatabase(connection.DatabaseName);
 
             Trains = database.GetCollection<Train>("Trains");
+            Carriages = database.GetCollection<Carriage>("Carriages");
+            Places = database.GetCollection<Place>("Places");
         }
     }
 }

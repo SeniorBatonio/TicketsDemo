@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace TicketsDemo.Mongo.Repositories
 {
-    class TrainRepository : ITrainRepository
+    public class TrainRepository : ITrainRepository
     {
         TicketsContext db = new TicketsContext();
 
