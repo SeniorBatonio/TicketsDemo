@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TicketsDemo.Data.Entities;
 using TicketsDemo.Data.Repositories;
 using TicketsDemo.Domain.Interfaces;
 using TicketsDemo.Models;
@@ -16,20 +17,20 @@ namespace TicketsDemo.Controllers
         private IReservationRepository _reservationRepo;
         private IReservationService _resServ;
         private ITicketService _tickServ;
-        private IPriceCalculationStrategy _priceCalc;
+        private IStrategyFactory _strategyFactory;
         private ITrainRepository _trainRepo;
 
         public RunController(ITicketRepository tick, IRunRepository run, 
             IReservationService resServ,
             ITicketService tickServ,
-            IPriceCalculationStrategy priceCalcStrategy,
+            IStrategyFactory strategyFactory,
             IReservationRepository reservationRepo,
             ITrainRepository trainRepo) {
             _tickRepo = tick;
             _runRepo = run;
             _resServ = resServ;
             _tickServ = tickServ;
-            _priceCalc = priceCalcStrategy;
+            _strategyFactory = strategyFactory;
             _reservationRepo = reservationRepo;
             _trainRepo = trainRepo;
         }
@@ -48,7 +49,7 @@ namespace TicketsDemo.Controllers
             return View(model);
         }
 
-        public ActionResult ReservePlace(int placeId) {
+        public ActionResult ReservePlace(int placeId, DTO dto = null) {
             var place = _runRepo.GetPlaceInRun(placeId);
 
             var reservation = _resServ.Reserve(place);
@@ -57,7 +58,7 @@ namespace TicketsDemo.Controllers
             {
                 Reservation = reservation,
                 PlaceInRun = place,
-                PriceComponents = _priceCalc.CalculatePrice(place),
+                PriceComponents = _strategyFactory.GetStrategy(_runRepo,_trainRepo, dto).CalculatePrice(place),
                 Date = place.Run.Date,
                 Train = _trainRepo.GetTrainDetails(place.Run.TrainId),
             };
@@ -66,9 +67,9 @@ namespace TicketsDemo.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTicket(CreateTicketModel model)
+        public ActionResult CreateTicket(CreateTicketModel model, DTO dto)
         {
-            var tick = _tickServ.CreateTicket(model.ReservationId,model.FirstName,model.LastName);
+            var tick = _tickServ.CreateTicket(model.ReservationId,model.FirstName,model.LastName, dto);
             return RedirectToAction("Ticket", new { id = tick.Id });
         }
 
